@@ -102,7 +102,7 @@ Enkele opmerkingen:
 - In het artikel van Bassil (2012) is Query 8 fout. Probeer deze te verbeteren.
 - Zorg er voor (door het construeren van geschikte data) dat alle queries ook iets van resultaten teruggeven. Dit geldt in het bijzonder de complexere queries.
 
-### Data
+### Testdata aanpassen
 
 De testdata die je in `data/` kan vinden, is minder uitgebreid dan wat Bassil (2012) rapporteerde. In deze opstelling zitten in totaal 100.000 records, terwijl dit er oorspronkelijk 1.000.000 waren. Breid de dataset dus zelf uit. Je kan dit doen met een eenvoudig script of zelfgeschreven programma dat random data genereert. De resultaten moeten opgeslagen worden in een .CSV-bestand met dezelfde naam en structuur als de huidige.
 
@@ -150,6 +150,14 @@ Bewerk het script voor je nieuwe VM en start de VM op:
 
 ```shell
 $ vagrant up srv002
+```
+
+**Opmerking:** De VMs krijgen nu 1024MB RAM-geheugen en 1 processorkern toegewezen. Als je deze waarden wilt aanpassen, bewerk dan het bestand `Vagrantfile` en pas de variabelen `MEMORY` en `CPUS` aan:
+
+```Ruby
+# Default memory size and number of CPUs for the VMs
+MEMORY = 1024
+CPUS = 1
 ```
 
 ### Vagrant tips
