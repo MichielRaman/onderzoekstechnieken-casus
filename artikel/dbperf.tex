@@ -1,0 +1,87 @@
+%==============================================================================
+% Casus onderzoeksproces: Database-performantie
+%==============================================================================
+% Gebaseerd op LaTeX-sjabloon ‘Stylish Article’ (zie artikeltin.cls)
+% Auteur: Jens Buysse, Bert Van Vreckem
+
+% Compileren document:
+% 1) latexmk -pdf db-performance
+% 2) biber db-performance
+% 3) latexmk -pdf db-performance
+
+\documentclass[fleqn,10pt]{artikeltin}
+
+%------------------------------------------------------------------------------
+% Metadata over het artikel
+%------------------------------------------------------------------------------
+
+\JournalInfo{HoGent Bedrijf en Organisatie} % Journal information
+\Archive{Onderzoekstechnieken 2016 - 2017} % Additional notes (e.g. copyright, DOI, review/research article)
+
+%---------- Titel & auteur ----------------------------------------------------
+
+\PaperTitle{Performantievergelijking van database-systemen}
+\PaperType{Casus onderzoeksproces} % Type document
+
+\Authors{Voornaam Naam\textsuperscript{1}, Voornaam Naam\textsuperscript{2}, Voornaam Naam\textsuperscript{3}, Voornaam Naam\textsuperscript{4}} % Authors
+\affiliation{\textbf{Contact:}
+  \textsuperscript{1} \href{mailto:voornaam.naam@student.hogent.be}{voornaam.naam@student.hogent.be};
+  \textsuperscript{2} \href{mailto:voornaam.naam@student.hogent.be}{voornaam.naam@student.hogent.be};
+  \textsuperscript{3} \href{mailto:voornaam.naam@student.hogent.be}{voornaam.naam@student.hogent.be};
+  \textsuperscript{4} \href{mailto:voornaam.naam@student.hogent.be}{voornaam.naam@student.hogent.be}}
+
+%---------- Abstract ----------------------------------------------------------
+
+\Abstract{ Hier komt de samenvatting van het artikel, als een doorlopende tekst van één paragraaf. Schrijf dit pas helemaal op het einde, als de inhoud al op punt staat. Volgende elementen moeten hier zeker in vermeld worden: de \textbf{context} (waarom is dit werk belangrijk?), de \textbf{nood} (waarom moet dit onderzocht worden?), de \textbf{taak} (wat is er precies uitgevoerd waarover in dit artikel gerapporteerd wordt?), het \textbf{object} (wat staat in dit document geschreven?), het \textbf{resultaat}, de belangrijkste \textbf{conclusie} en \textbf{perspectief} (welk vervolgonderzoek zou er hierna kunnen uitgevoerd worden?). }
+
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+\Keywords{Database-beheer. Relationele databases --- performantie} % Keywords
+
+%---------- Titel, inhoud -----------------------------------------------------
+\begin{document}
+
+%\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+\tableofcontents % Print the contents section
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+% Er is al een zekere structuur gegeven hieronder, maar pas dit aan als dat zinvol is (bv. uitvoeren experimenten en analyse resultaten in aparte sectie, enz.).
+
+\section{Inleiding} % The \section*{} command stops section numbering
+\label{sec:inleiding}
+
+Beschrijf in deze sectie de context (dit houdt ook literatuuroverzicht in), nood en taak. Hier horen veel literatuurverwijzingen thuis, minstens naar~\textcite{Bassil2012}.
+
+Een typische laatste zin voor de inleiding is ``De rest van dit artikel is als volgt gestructureerd: Sectie~\ref{sec:methodologie} beschrijft de gevolgde methodologie, Sectie [...]''
+
+\section{Methodologie}
+\label{sec:methodologie}
+
+Beschrijf hier in zoveel mogelijk detail hoe het experiment is opgezet. Het moet voor de lezer mogelijk zijn om aan de hand van de beschrijving het experiment onafhankelijk opnieuw op te zetten en uit te voeren.
+
+\section{Experimenten}
+\label{sec:experimenten}
+
+Beschrijf hier hoe de experimenten verlopen zijn en de belangrijkste resultaten. Voeg ook tabel(len) en figuren toe.
+
+Beschrijf zeker ook de uitkomst van de statistische toets: zijn de verschillen in performantie significant?
+
+\section{Conclusie}
+\label{sec:conclusie}
+
+Beschrijf hier de conclusie en eventuele bijkomende onderzoeksvragen die in een verder onderzoek kunnen uitgediept worden
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+
+\phantomsection
+\printbibliography[heading=bibintoc]
+
+\end{document}
