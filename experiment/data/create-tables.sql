@@ -1,7 +1,10 @@
-DROP DATABASE IF EXISTS dbo;
-CREATE DATABASE  dbo
- /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE dbo;
+/* The database is expected to already exist. This script will only create
+ * the necessary tables within the database.
+ *
+ * Run with e.g.
+ *
+ * mysql -h HOST -udbo -pdbo dbo < create-db.sh
+ */
 
 CREATE TABLE category (
 ca_id int NOT NULL,
