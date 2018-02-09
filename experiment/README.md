@@ -64,11 +64,11 @@ Vooral de eerste waarde is van belang. Je zal zelf een script moeten schrijven o
 ```console
 [vagrant@srv001 vagrant]$ tree /vagrant
 /vagrant
-├── data
+├── data               # Data om de database mee op te vullen
 │   ├── category.csv   # CSV-bestand met data voor tabel "category"
 │   ├── create-db.sql  # SQL-script dat database-tabellen aanmaakt
-│   ├── customer.csv
-│   └── ...
+│   ├── customer.csv   # Data voor tabel "customer"
+│   └── ...            #   enz.
 ├── provisioning       # Bevat scripts voor configuratie VMs
 │   ├── common.sh      # Dingen die op elke VM uitgevoerd worden
 │   ├── srv001.sh      # Script voor installatie VM `srv001'
@@ -128,8 +128,51 @@ Als je een nieuwe VM wil toevoegen aan de opstelling (bijvoorbeeld met een ander
 #   ip: 192.168.56.32
 ```
 
-In de huidige opstelling is er één VM gedefinieerd met naam `srv001` en IP-adres 192.168.56.31. 
+In de huidige opstelling is er één VM gedefinieerd met naam `srv001` en IP-adres 192.168.56.31. Je kan een nieuwe VM toevoegen door de laatste regels uit commentaar te halen. Je kan een ander OS dan CentOS 7 installeren door een alternatieve "base box" te specifiëren. Een overzicht van beschikbare systemen kan je vinden op <https://app.vagrantup.com/boxes/search>. Voorbeeld:
 
+
+```yaml
+- name: srv001
+  ip: 192.168.56.31
+
+- name: srv002
+  ip: 192.168.56.32
+  box: bento/ubuntu-16.04
+```
+
+Voeg vervolgens een script met dezelfde naam als de VM toe in de directory `provisioning/`. Je kan bv. het script voor de eerste kopiëren:
+
+```shell
+$ cp provisioning/srv001.sh provisioning/srv002.sh
+```
+
+Bewerk het script voor je nieuwe VM en start de VM op:
+
+```shell
+$ vagrant up srv002
+```
+
+### Vagrant tips
+
+De belangrijkste commando's om met Vagrant te werken:
+
+| Commando                   | Taak                              |
+| :---                       | :---                              |
+| `vagrant up srv001`        | start `srv001` op                 |
+| `vagrant ssh srv001`       | log in op `srv001`                |
+| `vagrant reload srv001`    | `srv001` rebooten                 |
+| `vagrant halt srv001`      | `srv001` afsluiten                |
+| `vagrant provision srv001` | het provisioning-script uitvoeren |
+| `vagrant destroy srv001`   | vernietig `srv001`                |
+
+Als je de naam van de VM weglaat, wordt het commando uitgevoerd op alle gedefinieerde VMs.
+
+Enkele tips:
+
+- De allereerste keer dat je `vagrant up` doet, wordt ook het zgn. provisioning-script (`provisioning/srv001.sh`) dat de VM installeert en configureert. Wanneer je opnieuw opstart, wordt dat niet meer gedaan, en moet je expliciet `vagrant provision` uitvoeren.
+- Als je het script wijzigt, dan is het niet noodzakelijk om de VM te verwijderen of te rebooten. `vagrant provision` volstaat.
+- Het huidige provisioning-script is zo geschreven dat het meerdere keren na elkaar kan uitgevoerd worden en zal enkel wijzigingen aanbrengen indien nodig. Bijvoorbeeld, als de database al bestaat, zal die niet verwijderd worden. Probeer dat zo te houden.
+- Zorg er voor dat er geen manuele wijzigingen meer nodig zijn, maar zet alles in het script. Zo kunnen je teamleden makkelijk de VM reconstrueren en onmiddellijk gebruiken.
 
 ## Referenties
 
