@@ -99,6 +99,8 @@ ensure_sebool()  {
 ensure_service_running() {
   local -r service="${1}"
 
+  info "Ensuring ${service} is running and enabled at boot"
+
   if ! systemctl is-active "${service}"; then
     systemctl start "${service}"
   fi
