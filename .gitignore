@@ -141,3 +141,12 @@ sympy-plots-for-*.tex/
 
 # VirtualBox appliances
 *.ova
+
+# Vim-Latex
+*.latexmain
+
+# ghostwriter
+*.md.backup
+
+# jabref
+*.bib.bak
