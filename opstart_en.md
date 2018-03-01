@@ -5,8 +5,8 @@
 - [ ] Install the necessary software (see below)
 - [ ] Each team member clones this repository (see below)
 - [ ] Fill out the names and contact information of team members in [README_en.md](README_en.md)
-- [ ] Adjust the name of the LaTeX document for the final paper into "dbperf-icX.tex" (with X being the number of your group)
-- [ ] Get familiar with Git if this is not yet the case (More info in this document)
+- [ ] Adjust the name of "dbperf.tex" under [paper_en/](paper_en/) into "dbperf-icX.tex" (with X being the number of your group)
+- [ ] Get familiar with Git (More info at the bottom of this document)
 - [ ] Reproduce the test environment under [experiment/](experiment/)
 
 ## Software installation

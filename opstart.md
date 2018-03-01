@@ -5,8 +5,8 @@
 - [ ] Installeer de nodige software (zie verder)
 - [ ] Elk teamlid kloont deze repository
 - [ ] Vul de namen en contactinfo van de teamleden aan in het README-bestand
-- [ ] Pas de naam aan van het LaTeX document voor het artikel aan in "dbperf-GGG.tex" (met GGG jullie groepnummer, bv g05 voor groep 5 op campus Gent).
-- [ ] Nog niet vertrouwd met het gebruik van Git? Kijk verder in dit document
+- [ ] Wijzig de naam van "dbperf.tex" in [paper_nl/](paper_nl/) naar "dbperf-GGG.tex" (met GGG jullie groepnummer, bv g05 voor groep 5 op campus Gent)
+- [ ] Nog niet vertrouwd met het gebruik van Git? Kijk dan verder in dit document
 - [ ] Reproduceer de testomgeving in [experiment/](experiment/)
 
 ## Installatie software
