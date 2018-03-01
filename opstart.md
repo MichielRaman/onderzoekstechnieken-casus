@@ -83,37 +83,61 @@ Je kan de naam van de lokale directory wijzigen in wat je zelf wil.
 
 ### Workflow
 
-1. Voor je begint wijzigingen aan te brengen, haal eerst eventuele wijzigingen van Github binnen
+1. Voor je begint wijzigingen aan te brengen, haal eerst eventuele wijzigingen van Github binnen:
 
     ```
     $ git pull
     ```
 
-2. Maak wijzigingen, commit ze lokaal
+2. Maak je eigen wijzigingen en commit ze lokaal:
 
     ```
     $ git add .
     $ git commit -m "Beschrijving van de wijziging"
     ```
 
-3. Haal voor de zekerheid nog eens eventuele wijzigingen van Github binnen, maar nu op de "achtergrond" (d.w.z. als er wijzigingen van Github zijn, worden ze nog niet meteen doorgevoerd op jouw nieuwe code):
-
-    ```
-    $ git fetch origin master
-    ```
-
-4. *Als* er wijzigingen binnengehaald werden, probeer je eigen wijzigingen *bovenop* die van Github toe te passen, zoniet mag je deze en volgende stap overslaan.
-
-    ```
-    $ git rebase master
-    ```
-
-5. Los eventuele conflicten op en commit. Volg de aanwijzingen van de Git command line client.
-6. Stuur wijzigingen naar Github:
+3. Stuur je wijzigingen naar Github:
 
     ```
     $ git push
     ```
 
+4. Als de `git push` uit stap 3 lukt, dan is alles in orde. Als de `git push` faalt met de foutmelding `[rejected]`, dan zul je eerst de nieuwe wijzigingen van Github halen en ze ***mergen*** met jouw lokale wijzigingen:
+
+    ```
+    $ git pull --no-commit
+    ```
+
+5. Bekijk het resultaat van deze merge:
+
+    ```
+    $ git diff HEAD
+    ```
+
+6. Los eventuele conflicten op door de betreffende bestanden aan te passen. Herhaal de `git diff HEAD` tot je tevreden bent. Daarna commit je het resultaat van de merge:
+
+	```
+	$ git add .
+	$ git commit -m "Merging from master"
+	```
+
+7. Ga terug naar stap 3.
+
 Deze werkwijze houdt de "historiek" van het project het eenvoudigst, zonder vertakkingen en merges. Door onderling goede afspraken te maken en de taken efficiënt te verdelen, kan je merge conflicten tot een minimum beperken.
 
+Er zijn ook enkele commando's die je extra informatie en inzicht geven, zonder de toestand van de repositorie of de bestanden te wijzigen. Probeer ze uit:
+
+```
+$ git status
+$ git diff
+$ git log
+$ git blame FILENAME
+```
+
+Met `git help` krijg je meer info over de git-commando's. Bijvoorbeeld:
+
+```
+$ git help commit
+$ git help diff
+$ git help log
+```
