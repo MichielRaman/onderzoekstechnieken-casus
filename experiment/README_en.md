@@ -69,56 +69,56 @@ The first number is the most important one. You will have to write a script your
 │   ├── create-db.sql  # SQL script that generates the tables
 │   ├── customer.csv   # CSV file wit data for the "customer" table
 │   └── ...            #   etc.
-├── provisioning       # Bevat scripts voor configuratie VMs
-│   ├── common.sh      # Dingen die op elke VM uitgevoerd worden
-│   ├── srv001.sh      # Script voor installatie VM `srv001'
-│   └── util.sh        # Bevat herbruikbare Bash-functies
+├── provisioning       # Scripts to configure VMs
+│   ├── common.sh      # Stuff executed on every VM
+│   ├── srv001.sh      # Script for installation of VM `srv001'
+│   └── util.sh        # Contains reusable Bash functions
 ├── queries
-│   ├── query10.sql    # Alle queries uit Bassil (2012)
+│   ├── query10.sql    # All queries from Bassil (2012)
 │   ├── query11.sql
 │   ├── query1.sql
 │   ├── query2.sql
 │   └── ...
-├── README.md          # Dit bestand
-├── Vagrantfile        # Configuratie Vagrant-omgeving (geen wijzigingen nodig)
-└── vagrant-hosts.yml  # Opsomming van alle VMs in deze testomgeving
+├── README_en.md       # This README
+├── Vagrantfile        # Configuration Vagrant environment (should not be changed)
+└── vagrant-hosts.yml  # Overview of all VMs in this test environment
 
 4 directories, 33 files
 
 ```
 
-## Experimenten uitbreiden
+## Extending the experiments
 
 ### Queries
 
-Je kan nieuwe queries toevoegen in de directory `queries/` en uitvoeren:
+You can add new queries in the directory `queries/` and execute them:
 
 ```console
 [vagrant@srv001 ~]$ mysql -udbo -pdbo dbo < /vagrant/queries/queryNN.sql
 ```
 
-Enkele opmerkingen:
+Some remarks:
 
-- In het artikel van Bassil (2012) is Query 8 fout. Probeer deze te verbeteren.
-- Zorg er voor (door het construeren van geschikte data) dat alle queries ook iets van resultaten teruggeven. Dit geldt in het bijzonder de complexere queries.
+- Query 8 from the article of Bassil (2012) is wrong. You will need to correct this query.
+- Make sure that all queries return something. To achieve this you will need to construct additional data. This is the case for the more complex queries in particular.
 
-### Testdata aanpassen
+### Adapting test data
 
-De testdata die je in `data/` kan vinden, is minder uitgebreid dan wat Bassil (2012) rapporteerde. In deze opstelling zitten in totaal 100.000 records, terwijl dit er oorspronkelijk 1.000.000 waren. Breid de dataset dus zelf uit. Je kan dit doen met een eenvoudig script of zelfgeschreven programma dat random data genereert. De resultaten moeten opgeslagen worden in een .CSV-bestand met dezelfde naam en structuur als de huidige.
+The test data under `data/` is less extensive than the data from Bassil (2012). In this setup we have 100,000 records. The setup of Bassil (2012) contains 1,000,000 records. You have to extend the data set yourself. You can generate random data with a simple script or program. This additional data must be saved in CSV files with the same name and structure as the current ones.
 
-Om nieuwe data in de database te importeren, moet de huidige database eerst verwijderd worden:
+Don't forget to drop the database, before you import new data:
 
-1. Verwijder de database door in te loggen op de server (`vagrant ssh`) en het volgende commando uit te voeren:
+1. To remove the database: log on to the server (`vagrant ssh`) and execute:
     ```
     mysql -uroot -pletmein <<< 'DROP DATABASE dbo'
     ```
-2. Log vervolgens terug uit en voer `vagrant provision` uit.
+2. Next, log off and execute `vagrant provision`
 
-Het provisioning-script zal de database opnieuw aanmaken en data inladen uit de CSV-bestanden.
+The provisioning script will create a new database and will import the data from the CSV files.
 
-### Nieuwe VM toevoegen
+### Adding a new VM
 
-Als je een nieuwe VM wil toevoegen aan de opstelling (bijvoorbeeld met een ander database-systeem waarmee je wil vergelijken), moet je eerst `vagrant-hosts.yml` bewerken:
+If you want to add a new VM to the setup, you will need to update `vagrant-hosts.yml`. This will be necessary to setup an additional database system, to compare with the MariaDB system:
 
 ```yaml
 - name: srv001
@@ -128,7 +128,7 @@ Als je een nieuwe VM wil toevoegen aan de opstelling (bijvoorbeeld met een ander
 #   ip: 192.168.56.32
 ```
 
-In de huidige opstelling is er één VM gedefinieerd met naam `srv001` en IP-adres 192.168.56.31. Je kan een nieuwe VM toevoegen door de laatste regels uit commentaar te halen. Je kan een ander OS dan CentOS 7 installeren door een alternatieve "base box" te specifiëren. Een overzicht van beschikbare systemen kan je vinden op <https://app.vagrantup.com/boxes/search>. Voorbeeld:
+Currently there is only one VM defined with the name `srv001` and IP address 192.168.56.31. To add a new VM, just uncomment the concerning lines. You can install another OS than CentOS 7 by specifying a different "base box". You can find an overview of available operating systems on <https://app.vagrantup.com/boxes/search>. Example:
 
 
 ```yaml
@@ -140,19 +140,19 @@ In de huidige opstelling is er één VM gedefinieerd met naam `srv001` en IP-adr
   box: bento/ubuntu-16.04
 ```
 
-Voeg vervolgens een script met dezelfde naam als de VM toe in de directory `provisioning/`. Je kan bv. het script voor de eerste kopiëren:
+You will need a script with the name of your VM in the `provisioning/` directory. For example, you can copy `srv001.sh` to `srv002.sh`:
 
 ```shell
 $ cp provisioning/srv001.sh provisioning/srv002.sh
 ```
 
-Bewerk het script voor je nieuwe VM en start de VM op:
+Update the script and start your new VM:
 
 ```shell
 $ vagrant up srv002
 ```
 
-**Opmerking:** De VMs krijgen nu 1024MB RAM-geheugen en 1 processorkern toegewezen. Als je deze waarden wilt aanpassen, bewerk dan het bestand `Vagrantfile` en pas de variabelen `MEMORY` en `CPUS` aan:
+**Remark:** Currently, the VMs have 1024MB RAM memory and 1 CPU core. You can update these values in the file `Vagrantfile`:
 
 ```Ruby
 # Default memory size and number of CPUs for the VMs
@@ -162,26 +162,26 @@ CPUS = 1
 
 ### Vagrant tips
 
-De belangrijkste commando's om met Vagrant te werken:
+The most important commands to work with Vagrant are:
 
-| Commando                   | Taak                              |
-| :---                       | :---                              |
-| `vagrant up srv001`        | start `srv001` op                 |
-| `vagrant ssh srv001`       | log in op `srv001`                |
-| `vagrant reload srv001`    | `srv001` rebooten                 |
-| `vagrant halt srv001`      | `srv001` afsluiten                |
-| `vagrant provision srv001` | het provisioning-script uitvoeren |
-| `vagrant destroy srv001`   | vernietig `srv001`                |
+| Command                    | Task                            |
+| :---                       | :---                            |
+| `vagrant up srv001`        | start up `srv001`               |
+| `vagrant ssh srv001`       | log in on `srv001`              |
+| `vagrant reload srv001`    | reboot `srv001`                 |
+| `vagrant halt srv001`      | shut down `srv001`              |
+| `vagrant provision srv001` | execute the provisioning script |
+| `vagrant destroy srv001`   | destroy `srv001`                |
 
-Als je de naam van de VM weglaat, wordt het commando uitgevoerd op alle gedefinieerde VMs.
+If you omit the name of the VM, the command will be executes on *all* defined VMs.
 
-Enkele tips:
+A few tips:
 
-- De allereerste keer dat je `vagrant up` doet, wordt ook het zgn. provisioning-script (`provisioning/srv001.sh`) dat de VM installeert en configureert. Wanneer je opnieuw opstart, wordt dat niet meer gedaan, en moet je expliciet `vagrant provision` uitvoeren.
-- Als je het script wijzigt, dan is het niet noodzakelijk om de VM te verwijderen of te rebooten. `vagrant provision` volstaat.
-- Het huidige provisioning-script is zo geschreven dat het meerdere keren na elkaar kan uitgevoerd worden en zal enkel wijzigingen aanbrengen indien nodig. Bijvoorbeeld, als de database al bestaat, zal die niet verwijderd worden. Probeer dat zo te houden.
-- Zorg er voor dat er geen manuele wijzigingen meer nodig zijn, maar zet alles in het script. Zo kunnen je teamleden makkelijk de VM reconstrueren en onmiddellijk gebruiken.
+- The first time you type `vagrant up`, the provisioning script (`provisioning/srv001.sh`) to install and configure your VM will be executed. Next time, the provisioning will not be executed anymore, but you can still *force* it by typing `vagrant provision`.
+- If you change the script, it is not necessary to remove or reboot the VM. It is sufficient to run `vagrant provision`.
+- The current provisioning script is written so that it can be run multiple times. It will only update what needs to be updated. For example: if the database already exists, it will not be removed. Try to keep it that way.
+- Make sure that no manual changes are needed anymore, so put everything in the script. This way, your team members can easily reconstruct the VM and use it immediately.
 
-## Referenties
+## References
 
 Bassil, Y. (2012). A Comparative Study on the Performance of the Top DBMS Systems. *Journal of Computer Science & Research, 1*(1), p. 20 - 31
