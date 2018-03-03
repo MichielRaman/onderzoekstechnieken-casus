@@ -123,7 +123,9 @@ Je kan de naam van de lokale directory wijzigen in wat je zelf wil.
 
 7. Ga terug naar stap 3.
 
-Deze werkwijze houdt de "historiek" van het project het eenvoudigst, zonder vertakkingen en merges. Door onderling goede afspraken te maken en de taken efficiënt te verdelen, kan je merge conflicten tot een minimum beperken.
+Voer de `git pull` (stap 1) en `git push` (stap 3) zo vaak mogelijk uit.
+Hierdoor zullen het aantal "rejected" pushes, en dus ook het aantal merges en conflicten, beperkt blijven.
+Goede afspraken maken en de taken goed verdelen, helpt uiteraard ook om merge conflicten te voorkomen.
 
 Er zijn ook enkele commando's die je extra informatie en inzicht geven, zonder de toestand van de repositorie of de bestanden te wijzigen. Probeer ze uit:
 
@@ -131,6 +133,7 @@ Er zijn ook enkele commando's die je extra informatie en inzicht geven, zonder d
 $ git status
 $ git diff
 $ git log
+$ git log --graph --pretty="%Cblue%h%Creset %ai %Cgreen%aN%Creset %s"
 $ git blame FILENAME
 ```
 
@@ -141,3 +144,4 @@ $ git help commit
 $ git help diff
 $ git help log
 ```
+

@@ -125,14 +125,18 @@ You can rename or move the directory with your local copy of the repository. Thi
 	
 7. Go back to step 3.
 
-This workflow will keep the history of the project linear, without too much diverging and merging. By making good arrangements and distributing tasks efficiently, merge conflicts can be kept to a minimum.
+Execute the `git pull` (step 1) and `git push` (step 3) as frequent as possible.
+This will minimize the number of "rejected" pushes, and thus the number of merges and conflicts.
+Obviously, making good arrangements and distributing tasks properly, also helps to prevent merge conflicts.
 
-Additionally, there are a few commands that will give you additional information and a better understanding, without changing the state of your repository or files. Try these commands:
+Additionally, there are a few commands that will give you additional information and a better understanding,
+without changing the state of your repository or files. Try these commands:
 
 ```
 $ git status
 $ git diff
 $ git log
+$ git log --graph --pretty="%Cblue%h%Creset %ai %Cgreen%aN%Creset %s"
 $ git blame FILENAME
 ```
 
