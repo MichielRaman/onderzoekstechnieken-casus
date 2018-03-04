@@ -133,7 +133,9 @@ Er zijn ook enkele commando's die je extra informatie en inzicht geven, zonder d
 $ git status
 $ git diff
 $ git log
-$ git log --graph --pretty="%Cblue%h%Creset %ai %Cgreen%aN%Creset %s"
+$ git log --graph --pretty="%C(red)%h %C(blue)%ai %C(green)%aN %C(reset)%s%C(red)%d"
+$ git whatchanged
+$ git whatchanged --graph --pretty="%C(red)%h %C(blue)%ai %C(green)%aN %C(reset)%s%C(red)%d"
 $ git blame FILENAME
 ```
 
